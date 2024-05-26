@@ -71,7 +71,7 @@ def login_view(request):
             if user.role == 'student':
                 student = Student.objects.get(pk=user.pk)
                 #filiere = Filiere.objects.filter(id_filiere=student.filiere)
-                return render(request, 'studentDash/emploi_du_temps.html')
+                return render(request, 'studentDash/emploi_du_temps.html',{'student' : student})
             elif user.role == 'teacher':
                 return redirect("listeCours")
             else:
