@@ -7,9 +7,6 @@
         </ul>
         <div class="ajouter"><a href="{% url 'ajouterEtudiant' %}">ajouter</a> <i class="fa-solid fa-plus"></i> </div>
         
-        
-        
-        
     </div>
 </div>
 
@@ -27,115 +24,19 @@
     </tr>
 </thead>
 <tbody>
+    {% for e in etudiants %}
     <tr>
-        <td>1</td>
-        <td>Jean</td>
-        <td>Dupont</td>
-        <td>jean.dupont@example.com</td>
-        <td>123 Rue des Fleurs</td>
-        <td>Informatique</td>
+        <td>{{e.idStudent}}</td>
+        <td>{{e.codeMassar}}</td>
+        <td>{{e.first_name}}</td>
+        <td>{{e.last_name}}</td>
+        <td>{{e.filiere.nom_filiere}}</td>
+        <td>{{e.niveau}}</td>
         <td >  <i class="fa-solid fa-trash"></i></td>
         <td><a href="#"><i class="fas fa-pencil-alt"></a></i>
         </td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>Marie</td>
-        <td>Dubois</td>
-        <td>marie.dubois@example.com</td>
-        <td>456 Avenue des Champs</td>
-        <td>Mathématiques</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Pierre</td>
-        <td>Leroy</td>
-        <td>pierre.leroy@example.com</td>
-        <td>789 Boulevard Principal</td>
-        <td>Physique</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>Alice</td>
-        <td>Moreau</td>
-        <td>alice.moreau@example.com</td>
-        <td>1010 Chemin de la Mer</td>
-        <td>Chimie</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>Paul</td>
-        <td>Lefevre</td>
-        <td>paul.lefevre@example.com</td>
-        <td>111 Rue du Paradis</td>
-        <td>Littérature</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>Sophie</td>
-        <td>Thomas</td>
-        <td>sophie.thomas@example.com</td>
-        <td>1313 Avenue du Soleil</td>
-        <td>Histoire</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>Luc</td>
-        <td>Garcia</td>
-        <td>luc.garcia@example.com</td>
-        <td>1515 Boulevard des Etoiles</td>
-        <td>Économie</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-<td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td>Emma</td>
-        <td>Robert</td>
-        <td>emma.robert@example.com</td>
-        <td>1717 Chemin des Montagnes</td>
-        <td>Langues Étrangères</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>9</td>
-        <td>Thomas</td>
-        <td>Petit</td>
-        <td>thomas.petit@example.com</td>
-        <td>1919 Avenue de la Plage</td>
-        <td>Biologie</td>
-        <td > <a href="#"><i class="fa-solid fa-plus"></i></a> </td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>Julie</td>
-        <td>Leroux</td>
-        <td>julie.leroux@example.com</td>
-        <td>2121 Rue de la Forêt</td>
-        <td>Arts Plastiques</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></i></a></i>
-</td>
-    </tr>
+    {% endfor %}
+    
 </tbody>
 </table>
