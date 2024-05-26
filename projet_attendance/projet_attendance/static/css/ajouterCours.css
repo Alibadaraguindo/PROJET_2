@@ -72,28 +72,22 @@ td {
 }
 
 /* Style des champs de saisie */
-td input[type="text"]{
-    width: calc(100% - 10px); /* Ajustement de la largeur en tenant compte du padding */
+td input , td select{
+    width: 60%; /* Ajustement de la largeur en tenant compte du padding */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
-.selectTd{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
+
 .InfosTd{
     font-weight: bold;
     font-size: 24px;
 }
 /* Style des boutons de sélection */
 select {
-    width: 100px;
     padding: 8px 16px;
     display: inline;
     border-radius: 8px;
-    
     background-color: #fff; /* Couleur de fond */
     cursor: pointer;
 }
@@ -103,7 +97,6 @@ option {
     padding: 8px;
 }
 input[type="date"] {
-    width: 200px;
     height: 30px;
     border-radius: 8px;
     transform: translateX(50%);

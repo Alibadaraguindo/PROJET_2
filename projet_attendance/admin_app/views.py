@@ -5,11 +5,11 @@ from admin_app.models import Teacher
 from datetime import date
 import io
 from django.http import FileResponse
-from reportlab.lib.pagesizes import A4
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
-from reportlab.lib.units import inch
+# from reportlab.lib.pagesizes import A4
+# from reportlab.lib import colors
+# from reportlab.lib.styles import getSampleStyleSheet
+# from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+# from reportlab.lib.units import inch
 
 from student_app.models import (
     Student,Classroom,Module,ClassSession,ModuleAssociate,Filiere,Marking)
@@ -135,8 +135,9 @@ def listeCours(request) :
 def ajouterCours(request):
     salles = Classroom.objects.all()
     filieres = Filiere.objects.all()
+    modules = Module.objects.all()
     if request.method == 'POST':
-        module_name = request.POST.get('module')
+        module_id = request.POST.get('module')
         salle_id = request.POST.get('salle')
         debut = request.POST.get('debut')
         fin = request.POST.get('fin')
@@ -148,8 +149,8 @@ def ajouterCours(request):
         id_filiere = request.POST.get('filiere')
         filiere = Filiere.objects.get(id_filiere=id_filiere)
 
-        # Création du module
-        module = Module.objects.create(module_name=module_name,filiere=filiere)
+        # Module
+        module=Module.objects.get(id_module=module_id)
         
         # Récupération de la salle
         salle = Classroom.objects.get(id_salle=salle_id)
@@ -158,7 +159,7 @@ def ajouterCours(request):
         class_session = ClassSession.objects.create(classroom=salle, heureDebut=debut, heureFin=fin, module=module)
         
         # Enregistrement des objets créés
-        module.save()
+        
         class_session.save()
         
         # Attribution du module à l'enseignant
@@ -167,7 +168,7 @@ def ajouterCours(request):
         
         return redirect('listeCours')
     
-    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres})
+    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres , 'modules' : modules})
 
 def modifierCours(request) : 
     cours = Module.objects.all()
