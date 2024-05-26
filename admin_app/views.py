@@ -32,10 +32,13 @@ def login_view(request):
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
+        print(type(user))
+        #print(user.username)
         if user is not None:
             login(request, user)
             #differencier etudiant aux prof
             if isinstance(user, Student):
+                print(type(user))
                 #recuperer la filiere associe à l'étudiant
                 filiere = Filiere.objects.filter(id_filiere = user.filiere)
                 print(filiere)
@@ -43,7 +46,7 @@ def login_view(request):
             elif isinstance(user, Teacher):
                 return redirect("listeCours")
             else :
-                error ='Invalid username or password'
+                error ='Invalid username or password or instance is no define'
                 return render(request, 'admin_app/login.html', {'error': error })
         # updated by achraf redirect 
         else:

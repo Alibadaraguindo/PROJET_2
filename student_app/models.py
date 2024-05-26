@@ -9,13 +9,17 @@ class Filiere(models.Model):
 class Student(AbstractUser):
     idStudent = models.AutoField(primary_key=True)
     codeMassar = models.CharField(max_length=100, unique=True)
-    dateNaissance = models.DateField()
+    dateNaissance = models.DateField(null =True)
     filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE)
     niveau = models.CharField(max_length=100)
     photo = models.ImageField(upload_to="images/",blank=True,null=True)
     groups = models.ManyToManyField('auth.Group', related_name='students')
     user_permissions = models.ManyToManyField('auth.Permission', related_name='student_users')
+    def has_perm(self, perm, obj=None):
+        return True
 
+    def has_module_perms(self, app_label):
+        return True
 
 
 class Module(models.Model):
