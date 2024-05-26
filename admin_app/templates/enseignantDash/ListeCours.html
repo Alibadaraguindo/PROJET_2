@@ -9,6 +9,7 @@
         <tr>
             <th>Filière</th>
             <th>Modoule</th>
+            <th>Jour</th>
             <th>Horaires</th>
             <th>Salle</th>
             <th></th>
@@ -19,15 +20,17 @@
         <tr>
             <td>{{ cour.filiere.nom_filiere }}</td>
             <td>  {{ cour.module_name }}</td>
+            <td>{{cour.classsession_set.first.jour}}</td>
             <td> {{ cour.classsession_set.first.heureDebut }} - {{ cour.classsession_set.first.heureFin }}</td>
 
             <td>{{ cour.classsession_set.first.classroom.id_salle }}</td>
             <td>
                 <form action ="{% url 'modifierCours' %}" method="POST">
-                    {% csrf_token %}
+                    {% csrf_token %} 
                 <input type="hidden" name = "filiere_nom" value="{{ cour.filiere.nom_filiere }}"> 
                 <input type="hidden" name = "module_name" value="{{ cour.module_name }}"> 
                 <input type="hidden" name = "id_salle" value="{{ cour.classsession_set.first.classroom.id_salle }}">
+                <input type="hidden" name = "jour" value="{{cour.classsession_set.first.jour}}"> 
                 <input type="hidden" name = "debut" value="{{ cour.classsession_set.first.heureDebut }}">
                 <input type="hidden" name = "fin" value="{{ cour.classsession_set.first.heureFin  }}">
                 <input type="submit" value="Modifier">

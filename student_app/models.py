@@ -38,6 +38,7 @@ class ClassSession(models.Model):
     classroom = models.ForeignKey(Classroom,blank=True,null=True,on_delete = models.PROTECT)
     heureDebut = models.TimeField(blank = True,null = True)
     heureFin = models.TimeField(blank = True,null = True)
+    jour = models.CharField(max_length = 50)
     #timetable = models.CharField(max_length=150,blank=True, null=True)
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
 

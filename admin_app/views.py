@@ -34,9 +34,17 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            
-            
-            return redirect("listeCours")
+            #differencier etudiant aux prof
+            if isinstance(user, Student):
+                #recuperer la filiere associe à l'étudiant
+                filiere = Filiere.objects.filter(id_filiere = user.filiere)
+                print(filiere)
+                return render(request,'studentDash/emploi_du_temps.html',{'filiere' : filiere})
+            elif isinstance(user, Teacher):
+                return redirect("listeCours")
+            else :
+                error ='Invalid username or password'
+                return render(request, 'admin_app/login.html', {'error': error })
         # updated by achraf redirect 
         else:
             # Gérer le cas où l'authentification échoue
@@ -101,6 +109,7 @@ def ajouterCours(request):
         salle_id = request.POST.get('salle')
         debut = request.POST.get('debut')
         fin = request.POST.get('fin')
+        jour = request.POST.get('jour')
         
         # prof connecté
         teacher = request.user 
@@ -116,7 +125,7 @@ def ajouterCours(request):
         salle = Classroom.objects.get(id_salle=salle_id)
         
         # Création de la session de cours
-        class_session = ClassSession.objects.create(classroom=salle, heureDebut=debut, heureFin=fin, module=module)
+        class_session = ClassSession.objects.create(classroom=salle, heureDebut=debut, heureFin=fin,jour=jour, module=module)
         
         # Enregistrement des objets créés
         module.save()
@@ -138,9 +147,10 @@ def modifierCours(request) :
         id_salle = request.POST.get('id_salle')
         debut = request.POST.get('debut')
         fin = request.POST.get('fin')
+        jour = request.POT.get('jour')
         salles = Classroom.objects.all()
         filieres = Filiere.objects.all()
-        return render(request , 'enseignantDash/modifierCours.html',{'filiere_nom' : filiere_nom, 'module_name' : module_name, 'id_salle' : id_salle, 'debut' : debut,'fin' : fin,'salles' : salles})
+        return render(request , 'enseignantDash/modifierCours.html',{'filiere_nom' : filiere_nom, 'module_name' : module_name, 'id_salle' : id_salle,'jour': jour, 'debut' : debut,'fin' : fin,'salles' : salles})
 
     return render(request , 'enseignantDash/ListeCours.html',{'cours' : cours})
 

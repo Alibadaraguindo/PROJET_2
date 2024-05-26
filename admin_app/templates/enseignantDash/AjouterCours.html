@@ -16,19 +16,32 @@
             <tr>
                 <td class="InfosTd">Filiere: </td>
                 <td>
-                    Filiere : <select name="filiere">
+                    <select name="filiere">
                         {% for filiere in  filieres %}   
                                 <option value="{{filiere.id_filiere}}">{{filiere.nom_filiere}}</option>
                         {% endfor %}
                             </select>
                 </td>
             </tr>
-       
             <tr>
-                <td class="InfosTd">Amphithéâtre : </td>
-                <td class="selectTd">
+                <td class="InfosTd">Jour: </td>
+                <td>
+                     <select name="jour">  
+                                <option value="Lundi">Lundi</option>
+                                <option value="Mardi">Mardi</option>
+                                <option value="Mercredi">Mercredi</option>
+                                <option value="Jeudi">Jeudi</option>
+                                <option value="Vendredi">Vendredi</option>
+                                <option value="Samedi">Samedi</option>
+                            </select>
+                </td>
+            </tr>
+ 
+            <tr>
+                <td class="InfosTd">Salle/Amphi : </td>
+                <td class="InfosTd">
                   
-                    Salle : <select name="salle">
+                     <select name="salle">
                         {% for salle in  salles %}   
                                 <option value="{{salle.id_salle}}">{{salle.id_salle}}</option>
                         {% endfor %}
@@ -37,7 +50,7 @@
             </tr>
             <tr>
                 <td class="InfosTd">Heure debut:  </td>
-                <td class="selectTd">
+                <td class="InfosTd">
                     
                     <input type="time" name="debut" riquired>
 
