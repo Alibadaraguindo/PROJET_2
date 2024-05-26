@@ -1,25 +1,24 @@
 from django.db import models
-from admin_app.models import Teacher
-from django.contrib.auth.models import AbstractUser, Group,Permission
+from admin_app.models import Teacher,User
+from django.contrib.auth.models import  Group,Permission
 
 class Filiere(models.Model):
     id_filiere = models.AutoField(primary_key=True)
     nom_filiere = models.CharField(max_length=100)
 
-class Student(AbstractUser):
+class Student(User):
     idStudent = models.AutoField(primary_key=True)
     codeMassar = models.CharField(max_length=100, unique=True)
-    dateNaissance = models.DateField(null =True)
+    dateNaissance = models.DateField(null=True)
     filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE)
     niveau = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to="images/",blank=True,null=True)
-    groups = models.ManyToManyField('auth.Group', related_name='students')
-    user_permissions = models.ManyToManyField('auth.Permission', related_name='student_users')
-    def has_perm(self, perm, obj=None):
-        return True
-
-    def has_module_perms(self, app_label):
-        return True
+    photo = models.ImageField(upload_to="images/", blank=True, null=True)
+    student_groups = models.ManyToManyField('auth.Group', related_name='students')
+    student_permissions = models.ManyToManyField('auth.Permission', related_name='student_users')
+    
+    class Meta:
+        verbose_name = 'Student'
+        verbose_name_plural = 'Students'
 
 
 class Module(models.Model):

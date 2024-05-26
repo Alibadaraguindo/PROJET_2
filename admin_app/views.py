@@ -25,7 +25,7 @@ def AjouterEnseignant(request):
 def AjouterEtudiant(request):
 
     return render(request,'admin_app/administration/ajouterEtudiant.html')
-def login_view(request):
+#def login_view(request):
     error=""
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -55,6 +55,35 @@ def login_view(request):
             return render(request, 'admin_app/login.html', {'error': error })
 
     return render(request, 'admin_app/login.html')
+
+def login_view(request):
+    error = ""
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        print(type(user))
+        # print(user.username)
+        if user is not None:
+            login(request, user)
+            # différencier étudiant des professeurs
+            if user.role == 'student':
+                student = Student.objects.get(pk=user.pk)
+                #filiere = Filiere.objects.filter(id_filiere=student.filiere)
+                return render(request, 'studentDash/emploi_du_temps.html')
+            elif user.role == 'teacher':
+                return redirect("listeCours")
+            else:
+                error = 'Invalid username or password or role is not defined'
+                return render(request, 'admin_app/login.html', {'error': error})
+        else:
+            # Gérer le cas où l'authentification échoue
+            error = 'Invalid username or password'
+            return render(request, 'admin_app/login.html', {'error': error})
+
+    return render(request, 'admin_app/login.html')
+
 
 @login_required
 def logout_user(request):#champs à definir
