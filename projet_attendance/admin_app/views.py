@@ -3,6 +3,14 @@ from django.contrib.auth.decorators import login_required
 # from student_app.activated_camera import camera_maked,preprocess_student_images
 from admin_app.models import Teacher
 from datetime import date
+import io
+from django.http import FileResponse
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+from reportlab.lib.units import inch
+
 from student_app.models import (
     Student,Classroom,Module,ClassSession,ModuleAssociate,Filiere,Marking)
 from django.contrib.auth import (
@@ -66,7 +74,8 @@ def login_view(request):
             login(request, user)
             
             
-            return render(request,'enseignantDash/EnseignantDash.html')
+            return redirect("listeCours")
+        # updated by achraf redirect 
         else:
             # Gérer le cas où l'authentification échoue
             error ='Invalid username or password'
@@ -200,10 +209,60 @@ def seanceDeCours(request):
             listeAbsences = Marking.objects.filter(date_marked=current_date, code_massar__filiere_id=id_filiere)
         else:
             listeAbsences = Marking.objects.none()  # Si aucun paramètre n'est fourni, renvoyer une liste vide
+           # Convert QuerySet to list of dictionaries
+        listeAbsencesSession = list(listeAbsences.values('code_massar__first_name', 'code_massar__last_name', 'code_massar__codeMassar', 'status'))
         
+        # Store the absences list in the session
+        request.session['listeAbsences'] = listeAbsencesSession
         # Ensuite, vous pouvez effectuer d'autres opérations ou afficher la liste des absences
         return render(request, 'enseignantDash/ListeEtudiant.html', {'listeAbsences': listeAbsences})
     
     return render(request, 'enseignantDash/ListeCours.html', {'cours': cours})
 
+def imprimer(request):
+    listeAbsences = request.session.get('listeAbsences', [])
+    
+    # Debug: Print the listeAbsences to console
+    print('Liste des absences récupérée:', listeAbsences)
 
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    
+    elements = []
+    styles = getSampleStyleSheet()
+    
+    # Title
+    title = Paragraph("Liste des absences", styles['Title'])
+    elements.append(title)
+    elements.append(Paragraph(" ", styles['Normal']))  # Empty space
+
+    # Table data
+    data = [["Nom", "Prénom", "Massar", "Status"]]
+    
+    for absence in listeAbsences:
+        data.append([
+            absence['code_massar__first_name'],
+            absence['code_massar__last_name'],
+            absence['code_massar__codeMassar'],
+            'Présent' if absence['status'] else 'Absent'
+        ])
+
+    # Table style
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 12),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ]))
+    
+    elements.append(table)
+    
+    # Build PDF
+    doc.build(elements)
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename="liste_absences.pdf")

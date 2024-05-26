@@ -1,4 +1,160 @@
-*{
+/* <!-- achraf updated ca  --> */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: grid;
+
+    place-items: center;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+
+
+}
+
+header img {
+    width: 100px;
+}
+
+main {
+
+  
+    border-radius: 16px;
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+main * {
+    text-align: center;
+}
+
+main h1 {
+    font-size: 40px;
+    max-width: 700px;
+    color: #EEEEEE;
+    ;
+}
+
+.btnLogin {
+    background-color: #EEEEEE;
+    color: #030637;
+    padding: 7px 40px;
+    border-radius: 4px;
+}
+
+/* .logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.container{
+    width:100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+@media(min-width:768px){
+    .container{  
+        width: 750px;
+}}
+@media(min-width:992px){
+    .container{  
+        width: 970px;
+}}
+@media(min-width:1200px){
+    .container{  
+        width: 1170px;
+}}
+header{
+    height: 100px;
+    width: 100%;
+    background-color: rgba(209, 209, 252, 1);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+}
+header img{
+    width:100px
+}
+main{
+    height:calc(100vh - 100px);
+}
+main .container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%
+    
+}
+
+
+/* ul{
+    list-style:none
+} 
+header{
+    height: 60px;
+    width: 100%;
+    display:flex;
+    align-items:center;
+}
+header .logo{
+    flex-basis:20%
+}
+header nav{
+    flex-basis:80%;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *{
     margin:0;
     padding:0;
     box-sizing:border-box;

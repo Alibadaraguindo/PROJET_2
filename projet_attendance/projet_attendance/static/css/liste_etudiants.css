@@ -17,7 +17,7 @@
     margin-top: 50px;
     margin-right: 100px;
 }
-.envoi form input[type="submit"]{
+.envoi form input[type="submit"],form a{
     padding: 10px 5px;
     cursor: pointer;
     width: 200px;

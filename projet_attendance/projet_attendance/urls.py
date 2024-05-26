@@ -21,6 +21,7 @@ urlpatterns = [
     path('AjouterCours/' , ajouterCours , name='ajouterCours'),
     path('ModifierCours/' , modifierCours , name='modifierCours'),
     path('remarque/' , remarque , name='remarque'),
+    path('imprimer/' , imprimer , name='imprimer'),
 
     path('ListeEtudiants/' , ListeEtudiants , name='ListeEtudiants'),
 ]

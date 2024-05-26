@@ -2,30 +2,34 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-
-    <header>
-        <div class="container">
-        <div class="logo">
-        <div><img src="{% static 'image/logo1.png' %}"></div>
-        <div><img src="{% static 'image/logo2.png' %}"></div>
-    </div>
-    </div>
-        <!-- <nav>
-            <ul>
-                <li><a href="#">home</a></li>
-                <li><a href="#">about</a></li>
-                <li><a href="#">login</a></li>
-                <li><a href="#">logup</a></li>
-            </ul>
-        </nav> -->
-    </header>
-    <main>
-
-        <div class="container">
-            <div class="box">
-            <h2>Bienvenue </h2>
-            <p>application de marquage d'absence</p>
-            <button><a href="{% url 'login' %}">Se connecter</a></button>
-    </div></div>
-    </main>
-    {% endblock content %}
+<!-- achraf updated ca  -->
+  
+    <body>
+        <style>
+            body {
+                background-image: url("{% static 'image/pngtree-an-empty-classroom-with-a-blackboard-image_2641577.jpg' %}");
+                background-size: cover;
+            }
+            
+            main{
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(7.1px);
+                -webkit-backdrop-filter: blur(7.1px);
+                border: 1px solid rgba(3, 6, 55, 0.19);
+            }
+        </style>
+     
+        <header>
+          <img src="{% static 'image/logo1.png' %}">
+            <img src="{% static 'image/logo2.png' %}">
+          
+        </header>
+        <main style="margin-top: 40px;">
+        
+    
+            <h1>Bienvenue à l'Application de Gestion d'Absences </h1>
+     
+               <a href="login" class="btnLogin">login</a>
+        </main>
+    </body>
+{% endblock content %}
