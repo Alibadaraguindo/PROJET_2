@@ -28,8 +28,8 @@ ul{
 }}
 
 :root{
-    --colorBackground: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
-    --colorBackgroundSaidBar: linear-gradient(to bottom, #37ecba 0%, #72afd3 100%);
-    --header:100px;
+    --colorBackground: rgba(227, 223, 211, );
+    --colorBackgroundSaidBar:rgba(227, 223, 211, 1);
+    --header:80px;
     --sidebar:250px;
 }

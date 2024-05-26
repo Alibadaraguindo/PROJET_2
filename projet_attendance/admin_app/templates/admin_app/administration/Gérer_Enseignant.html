@@ -6,11 +6,7 @@
             <li id="qui">enseignant</li>
             <li><form action=""><input type="text" name="chercher"><button type="submit"><i class="fa-brands fa-searchengin"></i></button> </form></li>
         </ul>
-        <div ><a href="{% url 'AjouterEnseignant' %}" class="ajouter">ajouter <i class="fa-solid fa-plus"></i> </div></a>
-        
-        
-        
-        
+        <div ><a href="{% url 'AjouterEnseignant' %}" class="ajouter">ajouter <i class="fa-solid fa-plus"></i> </div></a>   
     </div>
 </div>
 <table class="table">
@@ -20,113 +16,31 @@
         <th>Prénom</th>
         <th>Nom</th>
         <th>Email</th>
-        <th>Adresse</th>
         <th>Nb.ModelEnseigne</th>
-        <th>ajouter</th>
         <th>Supprimer</th>
+        <th>Modifier</th>
     </tr>
 </thead>
 <tbody>
+   
+{% for enseignant in enseignants %}
     <tr>
-        <td>1</td>
-        <td>Jean</td>
-        <td>Dupont</td>
-        <td>jean.dupont@example.com</td>
-        <td>123 Rue des Fleurs</td>
-        <td>5</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
+        <td>{{enseignant.idTeacher}} </td>
+        <td>{{enseignant.last_name}}</td>
+        <td>{{enseignant.first_name}}</td>
+        <td>{{enseignant.email}}</td>
+        <td></td>
+        <td ><i class="fa-solid fa-trash"  onclick='confirmSupprimer("{{ enseignant.idTeacher }}");'></i></td>
+        <td><a href="{% url 'ModifierEnseignant' enseignant.idTeacher %}"><i class="fas fa-pencil-alt"></a></i></td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>Marie</td>
-        <td>Dubois</td>
-        <td>marie.dubois@example.com</td>
-        <td>456 Avenue des Champs</td>
-        <td>3</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Pierre</td>
-        <td>Leroy</td>
-        <td>pierre.leroy@example.com</td>
-        <td>789 Boulevard Principal</td>
-        <td>8</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>Alice</td>
-        <td>Moreau</td>
-        <td>alice.moreau@example.com</td>
-        <td>1010 Chemin de la Mer</td>
-        <td>2</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>Paul</td>
-        <td>Lefevre</td>
-        <td>paul.lefevre@example.com</td>
-        <td>111 Rue du Paradis</td>
-        <td>6</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>6</td>
-        <td>Sophie</td>
-        <td>Thomas</td>
-        <td>sophie.thomas@example.com</td>
-        <td>1313 Avenue du Soleil</td>
-        <td>4</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>7</td>
-        <td>Luc</td>
-        <td>Garcia</td>
-        <td>luc.garcia@example.com</td>
-        <td>1515 Boulevard des Etoiles</td>
-        <td>7</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>8</td>
-        <td>Emma</td>
-        <td>Robert</td>
-        <td>emma.robert@example.com</td>
-        <td>1717 Chemin des Montagnes</td>
-        <td>1</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>9</td>
-        <td>Thomas</td>
-        <td>Petit</td>
-        <td>thomas.petit@example.com</td>
-        <td>1919 Avenue de la Plage</td>
-        <td>9</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>Julie</td>
-        <td>Leroux</td>
-        <td>julie.leroux@example.com</td>
-        <td>2121 Rue de la Forêt</td>
-        <td>4</td>
-        <td >  <i class="fa-solid fa-trash"></i></td>
-        <td><a href="#"><i class="fas fa-pencil-alt"></a></i></td>
-    </tr>
+{% endfor %}
 </tbody>
 </table>
+<script>
+    function confirmSupprimer(teacherId) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer cet enseignant ?")) {
+            window.location.href = "{% url 'SupprimerEnseignant' 0 %}".replace('0', teacherId);
+        }
+    }
+    </script>
 <script src="{% static 'js/administrateur.js' %}" ></script> 

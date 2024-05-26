@@ -13,6 +13,8 @@ urlpatterns = [
     path('administration/Gérer_Etudiant',Gérer_Etudiant,name="Gérer_Etudiant"),
     path('administration/Gérer_Modele',Gérer_Modele,name="Gérer_Modele"),
     path('administration/AjouterEnseignant',AjouterEnseignant,name="AjouterEnseignant"),
+    path('SupprimerEnseignant/<int:id_Teacher>/', SupprimerEnseignant, name='SupprimerEnseignant'),
+    path('ModifierEnseignant/<int:id_Teacher>/', ModifierEnseignant, name='ModifierEnseignant'),
     path('administration/AjouterEtudiant',AjouterEtudiant,name="ajouterEtudiant"),
     path('seanceDeCours/',seanceDeCours,name='seanceDeCours'),
    

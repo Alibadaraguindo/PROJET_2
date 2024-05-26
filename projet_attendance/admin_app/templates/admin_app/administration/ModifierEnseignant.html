@@ -13,11 +13,11 @@
             {% csrf_token %}
         <fieldset>
         <legend><span class="number">1</span> Personnel</legend>
-        <input type="text" name="nom" placeholder="Nom *" required>
-        <input type="text" name="prenom" placeholder="Prenom *" required>
-        <input type="email" name="email" placeholder=" Email *" required>
-        <input type="text" name="username" placeholder="username *" required>
-        <input type="password" name="password" placeholder="password *" required>
+        <input type="text" name="nom" placeholder="Nom *" required value="{{enseignant.last_name}}">
+        <input type="text" name="prenom" placeholder="Prenom *" required value="{{enseignant.first_name}}">
+        <input type="email" name="email" placeholder=" Email *" required value="{{enseignant.email}}">
+        <input type="text" name="username" placeholder="username *" required value="{{enseignant.username}}">
+        <input type="password" name="password" placeholder="password *" required value="{{enseignant.password}}">
         </fieldset>
         <fieldset>
         <legend><span class="number ">2</span>Filieres</legend>
@@ -89,7 +89,7 @@
             <div class="box">
             {% for module in modules %}
             <div onclick="checked(this)">
-                <lable for="{{module.module_name}}">{{module.module_name}}</lable><input type="checkbox" name="modules" id="{{module.module_name}}" value="{{module.id_module}}">
+                <lable for="{{module.module_name}}">{{module.module_name}}</lable><input type="checkbox" name="modules" id="{{module.module_name}}" value="{{module.id_module}}" {% for ModuleEnseignant in ModuleE %} {% if ModuleE == module %} checked {% endif %} {% endfor  %}>
             </div>
             {% endfor %}
             </div>

@@ -1,14 +1,13 @@
 .sideBarre{
-  padding-top: 10px;
+  padding-top: 30px;
   width: 250px;
   background: var(--colorBackgroundSaidBar);
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   position: fixed;
-  top:var(--header);
- 
-
+  top:80px;
+  left: 0px;
 }
 .sideBarre ul{
   flex-basis:90% ;
@@ -23,7 +22,7 @@
   background-image: linear-gradient(to right, #006175 0%, #00a950 100%);;
   border-radius: 40px;
   box-sizing: border-box;
-  color: #00a84f;
+  color: black;
   display: block;
   height: 50px;
   font-size: 1.4em;
@@ -45,7 +44,7 @@
 .sideBarre ul li  a span,
 .deconnexion a span {
   align-items: center;
-  background-color: #666;
+  background-color: cadetblue;
   border-radius: 40px;
   display: flex;
   justify-content: center;
@@ -56,6 +55,7 @@
 }
 .sideBarre ul li  a span.active{
   background: transparent;
+  color: white;
 }
 .sideBarre ul li  a:hover span,
 .deconnexion a:hover span{
@@ -132,8 +132,8 @@ width: 100%;
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  width: calc(100% - 250px);
-  margin: auto;
+  width: calc(100% - 350px);
+  margin-left: 250px;
   border: 1px solid #dddddd5b;
   margin-top: 20px;
   text-transform: capitalize;
@@ -473,3 +473,16 @@ form.ajouteEns{
   margin-left: 20px;
   margin-bottom: 20px;
 }
+.logo_header{display: flex;
+  justify-content: space-between;
+}
+.mainheader{
+  margin: 0;
+  position: fixed;
+  top: 0;
+  background: var(--colorBackgroundSaidBar);
+  z-index: 1;
+  opacity: 1;
+}
+    
+    

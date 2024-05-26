@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 # from student_app.activated_camera import camera_maked,preprocess_student_images
 from admin_app.models import Teacher
@@ -22,15 +22,48 @@ def home(request):
     
     return render(request,'admin_app/accueil.html')
 def administration(request):
-    return render(request,'admin_app/administration/Gérer_Enseignant.html')
+    enseignants=Teacher.objects.all()
+    return render(request,'admin_app/administration/Gérer_Enseignant.html',{"enseignants":enseignants})
 def Gérer_Etudiant(request):
     etudiants = Student.objects.all()
     return render(request,'admin_app/administration/Gérer_Etudiant.html' ,  {"etudiants" : etudiants})
 def Gérer_Modele(request):
     return render(request,'admin_app/administration/Gérer_Modele.html')
 def AjouterEnseignant(request):
-
-    return render(request,'admin_app/administration/AjouterEnseignant.html')
+    modules=Module.objects.all()
+    if request.method=="POST":
+        username=request.POST.get("username")
+        password=request.POST.get("password")
+        nom=request.POST.get("nom")
+        prenom=request.POST.get("prenom")
+        email=request.POST.get("email")
+        selected_modules = request.POST.getlist('modules')
+        if  password and username and nom and prenom and email and username!='' and nom!="" and prenom!="" and email!="" and password!="" :
+            enseignant=Teacher(first_name=prenom,last_name=nom,email=email,username=username,password=password)
+            enseignant.save()
+            for selected_module in selected_modules:
+                module=get_object_or_404(Module,id_module=selected_module)
+                moduleAssociat=ModuleAssociate(teacher=enseignant,module=module)
+                moduleAssociat.save()
+            return redirect("Gérer_Enseignant")
+        
+    return render(request,'admin_app/administration/AjouterEnseignant.html',{"modules":modules})
+def SupprimerEnseignant(request,id_Teacher):
+    enseignant=get_object_or_404(Teacher,idTeacher=id_Teacher)
+    enseignant.delete()
+    return redirect("Gérer_Enseignant")
+def ModifierEnseignant(request,id_Teacher):
+    modules=Module.objects.all()
+    enseignant=get_object_or_404(Teacher,idTeacher=id_Teacher)
+    moduleEnseignant=ModuleAssociate.objects.filter(teacher=enseignant)
+    
+    ModuleE= [module_associate.module for module_associate in moduleEnseignant]
+    context={
+        "modules":modules,
+        "ModuleE":ModuleE,
+        "enseignant":enseignant
+    }
+    return render(request,'admin_app/administration/ModifierEnseignant.html',context) 
 def AjouterEtudiant(request):
     filieres = Filiere.objects.all()
     if request.method == 'POST':
