@@ -108,13 +108,13 @@ def login_view(request):
             login(request, user)
             # différencier étudiant des professeurs
             if user.role == 'student':
-                student = Student.objects.get(pk=user.pk)
+                student = Student.objects.filter(idStudent=user.id)
                 #filiere = Filiere.objects.filter(id_filiere=student.filiere)
                 return render(request, 'studentDash/emploi_du_temps.html',{'student' : student})
             elif user.role == 'teacher':
                 return redirect("listeCours")
             elif user.role == 'admin':
-                return render(request,"administration/AdminDash.html",{'user' : user})
+                return render(request,"admin_app/administration/administration.html",{'user' : user})
             else:
                 error = 'Invalid username or password or role is not defined'
                 return render(request, 'admin_app/login.html', {'error': error})
@@ -177,8 +177,12 @@ def listeCours(request) :
 def ajouterCours(request):
     salles = Classroom.objects.all()
     filieres = Filiere.objects.all()
+    modules = Module.objects.all()
+    
     if request.method == 'POST':
-        module_name = request.POST.get('module')
+        id_module = request.POST.get('module')
+        print(id_module)
+        module = Module.objects.get(id_module=int(id_module))
         salle_id = request.POST.get('salle')
         debut = request.POST.get('debut')
         fin = request.POST.get('fin')
@@ -192,7 +196,7 @@ def ajouterCours(request):
         filiere = Filiere.objects.get(id_filiere=id_filiere)
 
         # Création du module
-        module = Module.objects.create(module_name=module_name,filiere=filiere)
+        #module = Module.objects.create(module_name=module_name,filiere=filiere)
         
         # Récupération de la salle
         salle = Classroom.objects.get(id_salle=salle_id)
@@ -201,7 +205,7 @@ def ajouterCours(request):
         class_session = ClassSession.objects.create(classroom=salle, heureDebut=debut, heureFin=fin,jour=jour, module=module)
         
         # Enregistrement des objets créés
-        module.save()
+        #module.save()
         class_session.save()
         
         # Attribution du module à l'enseignant
@@ -210,7 +214,7 @@ def ajouterCours(request):
         
         return redirect('listeCours')
     
-    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres})
+    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres,'modules' : modules})
 
 def modifierCours(request) : 
     cours = Module.objects.all()
@@ -280,31 +284,6 @@ def seanceDeCours(request):
         return render(request, 'enseignantDash/ListeEtudiant.html', {'listeAbsences': listeAbsences})
     
     return render(request, 'enseignantDash/ListeCours.html', {'cours': cours})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # def seanceDeCours(request):
 #     cours = Module.objects.all()
@@ -381,3 +360,15 @@ def imprimer(request):
     doc.build(elements)
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename="liste_absences.pdf")
+
+
+
+
+
+
+
+
+
+
+
+

@@ -13,7 +13,7 @@ urlpatterns = [
     path('administration/Gérer_Etudiant',Gérer_Etudiant,name="Gérer_Etudiant"),
     path('administration/Gérer_Modele',Gérer_Modele,name="Gérer_Modele"),
     path('administration/AjouterEnseignant',AjouterEnseignant,name="AjouterEnseignant"),
-    path('administration/AjouterEtudiant',AjouterEtudiant,name="ajouterEtudiant"),
+    path('administration/AjouterEtudiant/',AjouterEtudiant,name="ajouterEtudiant"),
     path('seanceDeCours/',seanceDeCours,name='seanceDeCours'),
     path('enseignant/' , enseignant , name='enseignant'),
     path('ListeCours/' , listeCours , name='listeCours'),
@@ -21,5 +21,10 @@ urlpatterns = [
     path('ModifierCours/' , modifierCours , name='modifierCours'),
     path('supprimerCour/' , supprimerCour , name='supprimerCour'),
     path('ListeEtudiants/' , ListeEtudiants , name='ListeEtudiants'),
+    
+    # POUR LE Etudiant
+    path('listModule/' , listModule , name='listModule'),
+    
+    
      path('imprimer/' , imprimer , name='imprimer'),
 ]
