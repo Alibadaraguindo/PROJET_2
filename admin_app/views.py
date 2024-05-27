@@ -76,7 +76,7 @@ def login_view(request):
             login(request, user)
             # différencier étudiant des professeurs
             if user.role == 'student':
-                student = Student.objects.get(pk=user.pk)
+                student = Student.objects.filter(idStudent=user.id)
                 #filiere = Filiere.objects.filter(id_filiere=student.filiere)
                 return render(request, 'studentDash/emploi_du_temps.html',{'student' : student})
             elif user.role == 'teacher':
@@ -328,3 +328,15 @@ def imprimer(request):
     doc.build(elements)
     buffer.seek(0)
     return FileResponse(buffer, as_attachment=True, filename="liste_absences.pdf")
+
+
+
+
+
+
+
+
+
+
+
+

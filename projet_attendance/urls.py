@@ -21,5 +21,10 @@ urlpatterns = [
     path('ModifierCours/' , modifierCours , name='modifierCours'),
     path('supprimerCour/' , supprimerCour , name='supprimerCour'),
     path('ListeEtudiants/' , ListeEtudiants , name='ListeEtudiants'),
+    
+    # POUR LE Etudiant
+    path('listModule/' , listModule , name='listModule'),
+    
+    
      path('imprimer/' , imprimer , name='imprimer'),
 ]

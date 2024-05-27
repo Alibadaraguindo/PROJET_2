@@ -4,6 +4,28 @@
 
 
 <h1>LISTE DES MODULES</h1>
+table>
+    <thead>
+        <tr>
+            <th>ID Module</th>
+            <th>Nom du Module</th>
+            <th>Filière</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for module in modules %}
+        <tr>
+            <td>{{ module.id_module }}</td>
+            <td>{{ module.module_name }}</td>
+            <td>{{ module.filiere.nom_filiere }}</td> 
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Aucun module disponible pour le moment.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 
 {% endblock liste_des_modules %}
