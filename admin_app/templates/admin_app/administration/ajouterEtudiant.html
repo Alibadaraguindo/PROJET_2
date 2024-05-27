@@ -9,56 +9,58 @@
 <div class="marginbar marginSidebar ajouteEtu">
 <h2>ajouter Etudiant</h2>
 <form action="">
-<ul class="personnl">
-    <li>
-        <label for="nom">id Etudiant</label>
-        <input type="text" name="nom" maxlength="100">
-        <span>Saisir id Etudiant</span>
-    </li>
-    <li>
-        <label for="nom">Code massare</label>
-        <input type="text" name="nom" maxlength="100">
-        <span>Saisir Code massare</span>
-    </li>
-    <li>
-        <label for="name">Name</label>
-        <input type="text" name="nom" maxlength="100">
-        <span>Saisir Nom</span>
-    </li>
-    <li>
-        <label for="name">Prenom</label>
-        <input type="text" name="prenom" maxlength="100">
-        <span>Saisir Prenom</span>
-    </li>
-    <li>
-        <label for="email">Email</label>
-        <input type="email" name="email" maxlength="100">
-        <span>Saisir email </span>
-    </li>
-    <li>
-        <label for="Phone">Phone</label>
-        <input type="tel" name="Phone" maxlength="100">
-        <span>Saisir telphone</span>
-    </li>
-    <li>
-        <label for="motPasse">dateNaissance</label>
-        <input type="date" name="motPasse" maxlength="100">
-        <span>Saisir dateNaissance</span>
-    </li>
-    <li>
-        <label for="motPasse">Filiere</label>
-        <select class="seleAjouter">
-            <option>fliere 1</option>
-            <option>fliere 1</option>
-            <option>fliere 1</option>
-            <option>fliere 1</option>
-        </select>
-        <span>Saisir dateNaissance</span>
-    </li>
-</ul>
-<button type="submit" class="button"> 
-    <span>Ajouter</span>
-</button>
+    {% csrf_token %}
+    <ul class="personnl">
+        <li>
+            <label for="massar">Code massare</label>
+            <input type="text" name="massar" maxlength="100">
+            <span>Saisir Code massare</span>
+        </li>
+        <li>
+            <label for="name">Name</label>
+            <input type="text" name="nom" maxlength="100">
+            <span>Saisir Nom</span>
+        </li>
+        <li>
+            <label for="name">Prenom</label>
+            <input type="text" name="prenom" maxlength="100">
+            <span>Saisir Prenom</span>
+        </li>
+        <li>
+            <label for="email">Email</label>
+            <input type="email" name="email" maxlength="100">
+            <span>Saisir email </span>
+        </li>
+    
+        <li>
+            <label for="dateNaissance">dateNaissance</label>
+            <input type="date" name="dateNaissance" maxlength="100">
+            <span>Saisir dateNaissance</span>
+        </li>
+        <li>
+            <label for="filiere">Filiere</label>
+            <select class="seleAjouter" name="filiere">
+                {% for f in filieres %}
+                <option value="{{f.id_filiere}}">{{ f.nom_filiere }}</option>
+                {% endfor %}
+            </select>
+            <span>Choisir la filiere</span>
+        </li>
+        <li>
+            <label for="niveau">Niveau</label>
+            <input type="text" name="niveau" maxlength="100">
+            <span>Saisir niveau</span>
+        </li>
+        <li>
+            <label for="photo">Photo</label>
+            <input type="file" name="photo" maxlength="100">
+            <span>Importer une photo</span>
+        </li>
+    </ul>
+    <button type="submit" class="button"> 
+        <span>Ajouter</span>
+    </button>
+    
 </form>
 </div>
 {% endblock %}
