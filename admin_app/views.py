@@ -29,9 +29,41 @@ def Gérer_Modele(request):
 def AjouterEnseignant(request):
 
     return render(request,'admin_app/administration/AjouterEnseignant.html')
-def AjouterEtudiant(request):
 
-    return render(request,'admin_app/administration/ajouterEtudiant.html')
+
+def AjouterEtudiant(request):
+    filieres = Filiere.objects.all()
+    if request.method == 'POST':
+        nom = request.POST.get("nom")
+        prenom = request.POST.get("prenom")
+        massar = request.POST.get("massar")
+        dateNaissance = request.POST.get("dateNaissance")
+        filiere = request.POST.get("filiere")
+        niveau = request.POST.get("niveau")
+        email = request.POST.get("email")
+        photo = request.FILES.get("photo")
+
+        #trouvé la filiere :
+        filiere = Filiere.objects.get(id_filiere = filiere)
+
+        # Créer l'instance Student
+        new_student = Student.objects.create(
+            first_name=nom,
+            last_name=prenom,
+            codeMassar=massar,
+            dateNaissance=dateNaissance,
+            filiere=filiere,
+            niveau=niveau,
+            email=email,
+            photo=photo,
+            username=email,
+            password=massar ,
+        )
+        return redirect("Gérer_Etudiant") 
+    
+    filieres = Filiere.objects.all() 
+    return render(request,'admin_app/administration/ajouterEtudiant.html',{"filieres" : filieres})
+
 #def login_view(request):
     error=""
     if request.method == 'POST':
