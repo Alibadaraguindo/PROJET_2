@@ -33,7 +33,7 @@
                 <input type="submit" value="Modifier">
                 </form>
             <td>
-                <form action ="% url 'Supprimer' %}" method="POST">
+                <form action ="{% url 'Supprimer' %}" method="POST">
                     {% csrf_token %}
                     <input type ="hidden" name ="filiere" value = "{{cour.filiere.id_filiere}}" >
                     <input type ="submit" value="Supprimer">  

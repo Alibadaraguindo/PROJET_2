@@ -89,7 +89,7 @@
             <div class="box">
             {% for module in modules %}
             <div onclick="checked(this)">
-                <lable for="{{module.module_name}}">{{module.module_name}}</lable><input type="checkbox" name="modules" id="{{module.module_name}}" value="{{module.id_module}}" {% for ModuleEnseignant in ModuleE %} {% if ModuleE == module %} checked {% endif %} {% endfor  %}>
+                <lable for="{{module.module_name}}">{{module.module_name}}</lable><input type="checkbox" name="modules" id="{{module.module_name}}" value="{{module.id_module}}" {% for ModuleEnseignant in ModuleE %} {% if ModuleEnseignant.id_module == module.id_module %} checked {% endif %} {% endfor  %}>
             </div>
             {% endfor %}
             </div>
