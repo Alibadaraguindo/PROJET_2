@@ -74,6 +74,8 @@ def login_view(request):
                 return render(request, 'studentDash/emploi_du_temps.html',{'student' : student})
             elif user.role == 'teacher':
                 return redirect("listeCours")
+            elif user.role == 'admin':
+                return render(request,"administration/AdminDash.html",{'user' : user})
             else:
                 error = 'Invalid username or password or role is not defined'
                 return render(request, 'admin_app/login.html', {'error': error})

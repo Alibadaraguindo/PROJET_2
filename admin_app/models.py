@@ -33,3 +33,13 @@ class Teacher(User):
         verbose_name_plural = 'Teachers'
 
 
+class Administrateur(User):
+    idAdmin = models.AutoField(primary_key=True)
+    admin_groups = models.ManyToManyField('auth.Group', related_name='admins')
+    admin_permissions = models.ManyToManyField('auth.Permission', related_name='admin')
+    
+    class Meta:
+        verbose_name = 'Administrateur'
+        verbose_name_plural = 'Administrateurs'
+
+

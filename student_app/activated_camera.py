@@ -21,21 +21,6 @@ def preprocess_student_images():
     return student_encodings
 
 
-
-
-#def parse_time(time_str):
-    # Utiliser une expression régulière pour extraire les heures et les minutes
-    match = re.match(r'(\d{1,2}):(\d{1,2})', time_str)
-    if match:
-        hours = int(match.group(1))
-        minutes = int(match.group(2))
-        return hours, minutes
-    else:
-        raise ValueError("Format d'heure invalide")
-
-
-
-
 from datetime import datetime, time
 
 
