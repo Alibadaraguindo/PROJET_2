@@ -26,4 +26,9 @@ def listModule(request):
     
     
 
+def emploi_view(request,idStudent):
+    
+    if request.method == "POST" : 
+        pass
+
 

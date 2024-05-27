@@ -2,6 +2,28 @@
 {% load static %}
 {% block emploi_du_temps %}
 <h1>EMPLOI DU TEMPS</h1>
-
-
+    {% if filiere and module %}
+    <table>
+    <thead>
+        <tr>
+            <th>Jour</th>
+            <th>Heure de début</th>
+            <th>Heure de fin</th>
+            <th>Module</th>
+            <th>Salle</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>{{ session.date|date:"l" }}</td>
+            <td>{{ session.heureDebut }}</td>
+            <td>{{ session.heureFin }}</td>
+            <td>{{ session.module.module_name }}</td>
+            <td>{{ session.classroom.id_salle }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+        {% endif %}
 {% endblock emploi_du_temps %}
