@@ -28,18 +28,35 @@ def get_current_class_session(teacher):
     try:
         current_datetime = datetime.now().time()
         
+        # Get all module associations for the given teacher
         module_associates = ModuleAssociate.objects.filter(teacher=teacher)
+        print(module_associates);
         modules = [module_assoc.module for module_assoc in module_associates]
 
+        # Check if modules list is empty
+        if not modules:
+            print("No modules associated with the teacher.")
+            return None
+
         for module in modules:
+            # Get all class sessions for the current module
             class_sessions = ClassSession.objects.filter(module=module)
             for class_session in class_sessions:
+                # Check if both heureDebut and heureFin are set
                 if class_session.heureDebut and class_session.heureFin:
+                    # Compare current time with class session times
                     if class_session.heureDebut <= current_datetime <= class_session.heureFin:
                         return class_session
-        
+                else:
+                    print(f"Class session {class_session.id} does not have valid start and end times.")
+
+        # No active class session found
+        print("No current class session found for the teacher.")
         return None
+
     except ClassSession.DoesNotExist:
+        # Handle case where no class sessions are found
+        print("ClassSession.DoesNotExist exception caught.")
         return None
 
 
@@ -47,6 +64,7 @@ def get_current_class_session(teacher):
 
 
 def camera_maked(student_encodings, teacher):
+
     current_class_session = get_current_class_session(teacher)
     if current_class_session is None:
         print("Aucune séance de cours n'a été trouvée pour ce professeur.")

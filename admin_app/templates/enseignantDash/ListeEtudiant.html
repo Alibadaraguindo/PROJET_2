@@ -31,9 +31,10 @@
         {% endfor %}
     </table>
     <div class="envoi">
-        <form action="">
+        <!-- <form action=" " method="get">
             <input type="submit" value="imprimer">
-        </form>
+        </form> -->
+        <a href="{% url 'imprimer' %} ">Imprimer</a>
         <form action="">
             <input type="submit" value="Envoyer a l'administrateur">
         </form>
