@@ -145,8 +145,12 @@ def listeCours(request) :
 def ajouterCours(request):
     salles = Classroom.objects.all()
     filieres = Filiere.objects.all()
+    modules = Module.objects.all()
+    
     if request.method == 'POST':
-        module_name = request.POST.get('module')
+        id_module = request.POST.get('module')
+        print(id_module)
+        module = Module.objects.get(id_module=int(id_module))
         salle_id = request.POST.get('salle')
         debut = request.POST.get('debut')
         fin = request.POST.get('fin')
@@ -160,7 +164,7 @@ def ajouterCours(request):
         filiere = Filiere.objects.get(id_filiere=id_filiere)
 
         # Création du module
-        module = Module.objects.create(module_name=module_name,filiere=filiere)
+        #module = Module.objects.create(module_name=module_name,filiere=filiere)
         
         # Récupération de la salle
         salle = Classroom.objects.get(id_salle=salle_id)
@@ -169,7 +173,7 @@ def ajouterCours(request):
         class_session = ClassSession.objects.create(classroom=salle, heureDebut=debut, heureFin=fin,jour=jour, module=module)
         
         # Enregistrement des objets créés
-        module.save()
+        #module.save()
         class_session.save()
         
         # Attribution du module à l'enseignant
@@ -178,7 +182,7 @@ def ajouterCours(request):
         
         return redirect('listeCours')
     
-    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres})
+    return render(request, 'enseignantDash/AjouterCours.html', {'salles': salles,'filieres' : filieres,'modules' : modules})
 
 def modifierCours(request) : 
     cours = Module.objects.all()
@@ -248,31 +252,6 @@ def seanceDeCours(request):
         return render(request, 'enseignantDash/ListeEtudiant.html', {'listeAbsences': listeAbsences})
     
     return render(request, 'enseignantDash/ListeCours.html', {'cours': cours})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # def seanceDeCours(request):
 #     cours = Module.objects.all()

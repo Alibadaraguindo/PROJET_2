@@ -8,11 +8,15 @@
     <form action="{% url 'ajouterCours' %}" method="post" onsubmit="return deceder('ajouterCours')" class="ajouterForm">
         {% csrf_token %}
         <table>
-            <tr>
-                <td class="InfosTd">Module : </td>
-                <td><input type="text" name="module" riquired></td>
-            </tr>
-         
+
+            <td class="InfosTd">Module: </td>
+            <td>
+                <select name="module">
+                    {% for module in  modules %}   
+                            <option value="{{module.id_module}}">{{module.module_name}}</option>
+                    {% endfor %}
+                        </select>
+            </td>
             <tr>
                 <td class="InfosTd">Filiere: </td>
                 <td>
